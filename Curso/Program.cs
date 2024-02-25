@@ -1,6 +1,7 @@
-﻿using Curso.Entities;
-using System;
+﻿using System;
 using System.Globalization;
+using System.Collections.Generic;
+using Curso.Entities;
 
 //HERANÇA E POLIMORFISMO
 namespace Curso
@@ -9,16 +10,39 @@ namespace Curso
     {
         static void Main(string[] args)
         {
-            Account acc1 = new Account(1001, "Alex", 500.0);
-            Account acc2 = new SavingsAccount(1002, "Sakia", 500.0, 0.01);
+            List<Employee> list = new List<Employee>();
+            Console.WriteLine("Enter the number of Employees: ");
+            int n = int.Parse(Console.ReadLine());
 
-            acc1.Withdraw(10.0);
-            acc2.Withdraw(10.0);
+            for (int i = 1; i < n; i++)
+            {
+                Console.WriteLine("O Funcionário é terceirizado? y/n");
+                char ch = char.Parse(Console.ReadLine());
+                Console.WriteLine("Nome do funcionário: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Quantidade de horas trabalhadas: ");
+                int hours = int.Parse(Console.ReadLine());
+                Console.WriteLine("Escreva o valor por hora trabalhado: ");
+                double valuePerHours = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
+                if (ch == 'y')
+                {
+                    Console.WriteLine("Additional Charge: ");
+                    double additionalCharge = double.Parse(Console.ReadLine());
+                    list.Add(new OutSourcedEmployee(name, hours, valuePerHours, additionalCharge));
+                }
+                else{
 
-            Console.WriteLine(acc1.Balance);
-            Console.WriteLine(acc2.Balance);
-
-            
+                    list.Add(new Employee(name, hours, valuePerHours));
+        
+                    }
+                Console.WriteLine();
+                Console.WriteLine("PAYMENTS");
+                foreach (Employee emp in list) 
+                {
+                    Console.WriteLine(emp.Name + " - $ " + emp.Payment().ToString("F2", CultureInfo.InvariantCulture));
+                }
+            }
+                        
         }
         
     }
