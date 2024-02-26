@@ -1,49 +1,53 @@
 ﻿using System;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using Curso.Entities;
+using Curso.Entities.Enums;
 using Curso.Entities;
 
-//HERANÇA E POLIMORFISMO
-namespace Curso
+
+//Herança e polimorfismo
+//EXERCICIO RESOLVIDO
+namespace Course
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<Employee> list = new List<Employee>();
-            Console.WriteLine("Enter the number of Employees: ");
+            List<Shape> list = new List<Shape>();
+
+            Console.Write("Enter the number of shapes: ");
             int n = int.Parse(Console.ReadLine());
 
-            for (int i = 1; i < n; i++)
+            for (int i = 1; i <= n; i++)
             {
-                Console.WriteLine("O Funcionário é terceirizado? y/n");
+                Console.WriteLine($"Shape #{i} data:");
+                Console.Write("Rectangle or Circle (r/c)? ");
                 char ch = char.Parse(Console.ReadLine());
-                Console.WriteLine("Nome do funcionário: ");
-                string name = Console.ReadLine();
-                Console.WriteLine("Quantidade de horas trabalhadas: ");
-                int hours = int.Parse(Console.ReadLine());
-                Console.WriteLine("Escreva o valor por hora trabalhado: ");
-                double valuePerHours = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
-                if (ch == 'y')
+                Console.Write("Color (Black/Blue/Red): ");
+                Color color = Enum.Parse<Color>(Console.ReadLine());
+                if (ch == 'r')
                 {
-                    Console.WriteLine("Additional Charge: ");
-                    double additionalCharge = double.Parse(Console.ReadLine());
-                    list.Add(new OutSourcedEmployee(name, hours, valuePerHours, additionalCharge));
+                    Console.Write("Width: ");
+                    double width = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    Console.Write("Height: ");
+                    double height = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    list.Add(new Rectangle(width, height, color));
                 }
-                else{
-
-                    list.Add(new Employee(name, hours, valuePerHours));
-        
-                    }
-                Console.WriteLine();
-                Console.WriteLine("PAYMENTS");
-                foreach (Employee emp in list) 
+                else
                 {
-                    Console.WriteLine(emp.Name + " - $ " + emp.Payment().ToString("F2", CultureInfo.InvariantCulture));
+                    Console.Write("Radius: ");
+                    double radius = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    list.Add(new Circle(radius, color));
                 }
             }
-                        
+
+            Console.WriteLine();
+            Console.WriteLine("SHAPE AREAS:");
+            foreach (Shape shape in list)
+            {
+                Console.WriteLine(shape.Area().ToString("F2", CultureInfo.InvariantCulture));
+            }
         }
-        
     }
 }
