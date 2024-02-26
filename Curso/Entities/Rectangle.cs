@@ -16,6 +16,13 @@ namespace Curso.Entities
         {
 
         }
+
+        public Rectangle(double widht, double height,Color color) : base(color)
+        {
+            Widht = widht;
+            Height = height;
+        }
+
         public override double Area()
         {
             return Widht * Height;
