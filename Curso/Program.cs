@@ -9,32 +9,47 @@ namespace Course
     {
         static void Main(string[] args)
         {
+            // Demonstração construtores DateTime
+            DateTime d1 = new DateTime(2000, 8, 15);
+            DateTime d2 = new DateTime(2000, 8, 15, 13, 05, 58);
+            DateTime d3 = new DateTime(2000, 8, 15, 13, 05, 58, 275);
 
-            string original = "abcde FGHIJ ABC abc DEFG    ";
-            string s1 = original.ToUpper();
-            string s2 = original.ToLower();
-            string s3 = original.Trim();
-            int n1 = original.IndexOf("bc");
-            int n2 = original.LastIndexOf("bc");
-            string s4 = original.Substring(3);
-            string s5 = original.Substring(3, 5);
-            string s6 = original.Replace('a', 'x');
-            string s7 = original.Replace("abc" , "xy");
-            bool b1 = String.IsNullOrEmpty(original);
-            bool b2 = String.IsNullOrWhiteSpace(original);
 
-            Console.WriteLine("Original: -" + original + "-");
-            Console.WriteLine("ToUpper: -" + s1 + "-");
-            Console.WriteLine("ToLower: -" + s2 + "-");
-            Console.WriteLine("Trim: -" + s3 + "-");
-            Console.WriteLine("IndexOf('bc'): " + n1);
-            Console.WriteLine("LastIndexOf('bc'): " + n2);
-            Console.WriteLine("Substring(3): -" + s4 + "-");
-            Console.WriteLine("Substring(3, 5): -" + s5 + "-");
-            Console.WriteLine("Replace('a', 'x'): -" + s6 + "-");
-            Console.WriteLine("Replace('abc', 'xy'): -" + s7 + "-");
-            Console.WriteLine("IsNullOrEmpty: " + b1);
-            Console.WriteLine("IsNullOrWhiteSpace: " + b2);
+            Console.WriteLine(d1);
+            Console.WriteLine(d2);
+            Console.WriteLine(d3);
+
+            // Demo Now, UtcNow, Today
+            DateTime d4 = DateTime.Now;
+            DateTime d5 = DateTime.UtcNow;
+            DateTime d6 = DateTime.Today;
+
+            Console.WriteLine(d4);
+            Console.WriteLine(d5);
+            Console.WriteLine(d6);
+
+            // Demo do parametro Parse da classe DateTime
+            DateTime d7 = DateTime.Parse("2000-08-15");
+            DateTime d8 = DateTime.Parse("2000-08-15 13:05:58");
+            DateTime d9 = DateTime.Parse("2000/08/15");
+            DateTime d10 = DateTime.Parse("2000/08/15 13:05:58");
+
+
+            Console.WriteLine(d7);
+            Console.WriteLine(d8);
+            Console.WriteLine(d9);
+            Console.WriteLine(d10);
+
+
+            //Demo ParseExact
+            DateTime d11 = DateTime.ParseExact("2000-08-15","yyyy-MM-dd",CultureInfo.InvariantCulture);
+            DateTime d12 = DateTime.ParseExact("2000-08-15 13:05:58", "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+            
+
+            Console.WriteLine(d11);
+            Console.WriteLine(d12);
+
+
 
         }
     }
