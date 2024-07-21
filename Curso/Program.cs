@@ -1,57 +1,40 @@
-﻿using Curso.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 
 
-//Herança e polimorfismo
-//EXERCICIO : pagador de impostos CPF X CNPJ 
 namespace Course
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<TaxPayer> list = new List<TaxPayer>();
 
-            Console.Write("Enter the number of tax payers: ");
-            int n = int.Parse(Console.ReadLine());
+            string original = "abcde FGHIJ ABC abc DEFG    ";
+            string s1 = original.ToUpper();
+            string s2 = original.ToLower();
+            string s3 = original.Trim();
+            int n1 = original.IndexOf("bc");
+            int n2 = original.LastIndexOf("bc");
+            string s4 = original.Substring(3);
+            string s5 = original.Substring(3, 5);
+            string s6 = original.Replace('a', 'x');
+            string s7 = original.Replace("abc" , "xy");
+            bool b1 = String.IsNullOrEmpty(original);
+            bool b2 = String.IsNullOrWhiteSpace(original);
 
-            for (int i = 1; i <= n; i++)
-            {
-                Console.WriteLine($"Tax payer #{i} data:");
-                Console.Write("Individual or company (i/c)? ");
-                char type = char.Parse(Console.ReadLine());
-                Console.Write("Name: ");
-                String name = Console.ReadLine();
-                Console.Write("Anual income: ");
-                double income = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                if (type == 'i')
-                {
-                    Console.Write("Health expenditures: ");
-                    double healthExpenditures = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                    list.Add(new Individual(name, income, healthExpenditures));
-                }
-                else
-                {
-                    Console.Write("Number of employees: ");
-                    int numberOfEmployees = int.Parse(Console.ReadLine());
-                    list.Add(new Company(name, income, numberOfEmployees));
-                }
-            }
-
-            double sum = 0.0;
-            Console.WriteLine();
-            Console.WriteLine("TAXES PAID:");
-            foreach (TaxPayer tp in list)
-            {
-                double tax = tp.Tax();
-                Console.WriteLine(tp.Name + ": $ " + tax.ToString("F2", CultureInfo.InvariantCulture));
-                sum += tax;
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("TOTAL TAXES: $ " + sum.ToString("F2", CultureInfo.InvariantCulture));
+            Console.WriteLine("Original: -" + original + "-");
+            Console.WriteLine("ToUpper: -" + s1 + "-");
+            Console.WriteLine("ToLower: -" + s2 + "-");
+            Console.WriteLine("Trim: -" + s3 + "-");
+            Console.WriteLine("IndexOf('bc'): " + n1);
+            Console.WriteLine("LastIndexOf('bc'): " + n2);
+            Console.WriteLine("Substring(3): -" + s4 + "-");
+            Console.WriteLine("Substring(3, 5): -" + s5 + "-");
+            Console.WriteLine("Replace('a', 'x'): -" + s6 + "-");
+            Console.WriteLine("Replace('abc', 'xy'): -" + s7 + "-");
+            Console.WriteLine("IsNullOrEmpty: " + b1);
+            Console.WriteLine("IsNullOrWhiteSpace: " + b2);
 
         }
     }
